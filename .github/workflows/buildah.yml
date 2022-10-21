@@ -9,7 +9,7 @@ jobs:
       registry:
         image: registry:2
         ports:
-          - 5000:5000
+          - 5001:5000
 
     steps:
     - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: localhost:5000
+        registry: localhost:5001
         tls-verify: false
         
     - name: Inspect
