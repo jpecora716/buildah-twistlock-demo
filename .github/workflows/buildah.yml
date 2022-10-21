@@ -37,7 +37,7 @@ jobs:
       env:
         IMAGE: ${{ steps.build-image.outputs.image }}
       run: |
-        podman inspect $IMAGE
+        docker inspect $IMAGE
 
 
     - name: Prisma Cloud image scan
