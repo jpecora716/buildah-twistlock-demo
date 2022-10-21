@@ -34,7 +34,7 @@ jobs:
         
     - name: Inspect
       run: |
-        docker inspect localhost:5000/jpecora716/pccdemo:latest
+        podman inspect localhost:5000/jpecora716/pccdemo:latest
 
     - name: Prisma Cloud image scan
       id: scan
