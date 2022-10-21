@@ -34,8 +34,10 @@ jobs:
         tls-verify: false
         
     - name: Inspect
+      env:
+        IMAGE: ${{ steps.build-image.outputs.image }}
       run: |
-        curl localhost:5000/v2/pccdemo/tags/list
+        podman inspect $IMAGE
 
 
     - name: Prisma Cloud image scan
