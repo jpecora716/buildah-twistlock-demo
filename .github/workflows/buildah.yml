@@ -31,6 +31,10 @@ jobs:
         tags: ${{ steps.build-image.outputs.tags }}
         registry: localhost:5000
         tls-verify: false
+        
+    - name: Inspect
+      run: |
+        docker inspect localhost:5000/pccdemo:latest
 
     - name: Prisma Cloud image scan
       id: scan
