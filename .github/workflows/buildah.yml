@@ -4,7 +4,7 @@ on: workflow_dispatch
 jobs:
   build:
     name: Build image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     services:
       registry:
         image: registry:2
@@ -38,7 +38,6 @@ jobs:
         IMAGE: ${{ steps.build-image.outputs.image }}
       run: |
         docker inspect $IMAGE
-
 
     - name: Prisma Cloud image scan
       id: scan
