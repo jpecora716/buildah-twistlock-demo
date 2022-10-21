@@ -1,11 +1,17 @@
 name: Build a Dockerfile using buildah and scan using prisma cloud compute
 on: workflow_dispatch
 
+env:
+  IMAGE_NAME: pccdemo
+  IMAGE_TAGS: latest ${{ github.sha }}
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+
 jobs:
   build:
     name: Build image
     runs-on: ubuntu-20.04
-    container: ubuntu
     services:
       registry:
         image: registry:2
@@ -16,7 +22,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Buildah Action
-      id: build-image
+      id: build_image
       uses: redhat-actions/buildah-build@v2
       with:
         image: pccdemo
@@ -25,14 +31,18 @@ jobs:
         containerfiles: |
           ./Dockerfile
           
-    - name: Push to localhost
-      id: push-to-localhost
-      uses: redhat-actions/push-to-registry@v2
+    # Push the image to GHCR (Image Registry)
+    - name: Push To GHCR
+      uses: ./
+      id: push
       with:
-        image: ${{ steps.build-image.outputs.image }}
-        tags: ${{ steps.build-image.outputs.tags }}
-        registry: registry:5000
-        tls-verify: false
+        image: ${{ steps.build_image.outputs.image }}
+        tags: ${{ steps.build_image.outputs.tags }}
+        registry: ${{ env.IMAGE_REGISTRY }}
+        username: ${{ env.REGISTRY_USER }}
+        password: ${{ env.REGISTRY_PASSWORD }}
+        extra-args: |
+          --disable-content-trust
         
     - name: Inspect
       env:
