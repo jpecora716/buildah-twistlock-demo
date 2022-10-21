@@ -51,7 +51,7 @@ jobs:
         pcc_console_url: ${{ secrets.PCC_CONSOLE_URL }}
         pcc_user: ${{ secrets.PCC_USER }}
         pcc_pass: ${{ secrets.PCC_PASS }}
-        image_name: ${{ steps.push-to-localhost.outputs.registry-path }}
+        image_name: ${{ steps.push.outputs.registry-path }}
 
       # (Optional) for compatibility with GitHub's code scanning alerts
     - name: Upload SARIF file
