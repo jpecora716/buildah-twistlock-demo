@@ -31,7 +31,6 @@ jobs:
         tags: ${{ steps.build-image.outputs.tags }}
         registry: localhost:5000
         tls-verify: false
-        extra-args: network=host
 
     - name: Prisma Cloud image scan
       id: scan
