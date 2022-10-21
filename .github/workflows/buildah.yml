@@ -43,6 +43,10 @@ jobs:
         password: ${{ env.REGISTRY_PASSWORD }}
         extra-args: |
           --disable-content-trust
+    
+    - name: sleep
+      run: |
+        sleep 60
 
     - name: Prisma Cloud image scan
       id: scan
