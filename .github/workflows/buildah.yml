@@ -34,7 +34,7 @@ jobs:
         
     - name: Inspect
       run: |
-        docker inspect localhost:5000/pccdemo:latest
+        docker inspect localhost:5001/pccdemo:latest
 
     - name: Prisma Cloud image scan
       id: scan
