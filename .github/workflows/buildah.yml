@@ -27,7 +27,7 @@ jobs:
       with:
         image: pccdemo
         tags: ${{ github.sha }}
-        oci: true
+        oci: false
         containerfiles: |
           ./Dockerfile
           
