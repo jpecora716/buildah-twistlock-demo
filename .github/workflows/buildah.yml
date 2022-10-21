@@ -18,7 +18,7 @@ jobs:
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: jpecora716/pccdemo
+        image: pccdemo
         tags: latest ${{ github.sha }}
         containerfiles: |
           ./Dockerfile
@@ -34,7 +34,8 @@ jobs:
         
     - name: Inspect
       run: |
-        curl localhost:5000/v2/_catalog
+        curl localhost:5000/v2/pccdemo/tags/list
+
 
     - name: Prisma Cloud image scan
       id: scan
