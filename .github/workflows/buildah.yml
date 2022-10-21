@@ -9,7 +9,7 @@ jobs:
       registry:
         image: registry:2
         ports:
-          - 5001:5000
+          - 5000:5000
 
     steps:
     - uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: pccdemo
+        image: jpecora716/pccdemo
         tags: latest ${{ github.sha }}
         containerfiles: |
           ./Dockerfile
@@ -29,12 +29,12 @@ jobs:
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: localhost:5001
+        registry: localhost:5000
         tls-verify: false
         
     - name: Inspect
       run: |
-        docker inspect localhost:5001/pccdemo:latest
+        docker inspect localhost:5000/jpecora716/pccdemo:latest
 
     - name: Prisma Cloud image scan
       id: scan
