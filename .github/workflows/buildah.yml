@@ -46,7 +46,7 @@ jobs:
         
     - name: Inspect
       env:
-        IMAGE: ${{ steps.build-image.outputs.image }}
+        IMAGE: ${{ steps.build_image.outputs.image }}
       run: |
         docker inspect $IMAGE
 
