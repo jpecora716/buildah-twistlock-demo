@@ -44,9 +44,12 @@ jobs:
         extra-args: |
           --disable-content-trust
     
-    - name: sleep
+    - name: Docker Pull
+      env: 
+        DOCKER_IMAGE: ${{ steps.push.outputs.registry-path }}
       run: |
-        sleep 60
+        echo $DOCKER_IMAGE
+        docker pull $DOCKER_IMAGE
 
     - name: Prisma Cloud image scan
       id: scan
