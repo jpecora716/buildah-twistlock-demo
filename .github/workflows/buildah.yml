@@ -30,7 +30,7 @@ jobs:
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: localhost:5000
+        registry: registry:5000
         tls-verify: false
         
     - name: Inspect
